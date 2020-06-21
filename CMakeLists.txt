@@ -7,6 +7,8 @@ if(DEFINED WIN32)
     set(LIBUSB10_PATH "c:/checkm8/libusb_win/" CACHE PATH "Path to libusb1-0 directory")
 endif()
 
+set(LIBUSB10_PATH "/usr/local/Cellar/libusb/1.0.23/include/" CACHE PATH "Path to libusb1-0 directory")
+
 set(SOURCE_FILES 
 src/main.cpp src/dfu.cpp 
 src/usbexec.cpp
@@ -18,12 +20,17 @@ src/aes.c
 
 add_executable(king ${SOURCE_FILES})
 
-target_include_directories(king PRIVATE include)
+#target_include_directories(king PRIVATE include)
+target_include_directories(king PRIVATE ${LIBUSB10_PATH} include)
 
 if(DEFINED WIN32) 
     target_include_directories(king PRIVATE ${LIBUSB10_PATH}/include)
     find_library(LIBUSB10 NAMES libusb-1.0.lib PATHS ${LIBUSB10_PATH}/lib)
     target_link_libraries(king ${LIBUSB10} Ws2_32.lib)
 else()
-    target_link_libraries(king usb-1.0)
+    #target_link_libraries(king usb-1.0)
+    find_library(CF CoreFoundation)
+    find_library(IOK IOKit)
+    target_link_libraries(king ${CF} ${IOK} /usr/local/Cellar/libusb/1.0.23/lib/libusb-1.0.a)
+    
 endif()
