@@ -15,6 +15,8 @@ build:
   cd build
  
   cmake ..
+  
+  make
 
 Works on my iPhone 6s n71ap :)
 
