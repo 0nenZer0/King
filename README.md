@@ -1,3 +1,25 @@
+Fork from a1exdandy..
+
+modify to compile im MAC OS catalina 10.15.5
+
+install libusb:
+
+ brew install libusb - current version for me is 1.0.23 - may need to edit CMakeList.txt
+ 
+build:
+
+  cd King
+ 
+  mkdir build
+ 
+  cd build
+ 
+  cmake ..
+
+Works on my iPhone 6s n71ap :)
+
+Original README below
+===========================================================
 # King
 
 Port of [@axi0mX's](https://twitter.com/axi0mx) checkm8 exploit ([ipwndfu](https://github.com/axi0mX/ipwndfu)) to C/C++
